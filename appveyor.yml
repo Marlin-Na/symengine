@@ -54,7 +54,8 @@ build_script:
 - if [%COMPILER%]==[MSVC15] if [%PLATFORM%]==[Win32] cmake -G "Visual Studio 14 2015" -DCMAKE_PREFIX_PATH=%CONDA_PREFIX%\Library ..
 - if [%COMPILER%]==[MSVC15] if [%PLATFORM%]==[x64] cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_PREFIX_PATH=%CONDA_PREFIX%\Library ..
 - if [%COMPILER%]==[MinGW] cmake -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH=C:\MinGW -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ..
-- if [%COMPILER%]==[MinGW-w64] cmake -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH=C:\mingw64 -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ..
+## Build 32 bit target. FIXME
+- if [%COMPILER%]==[MinGW-w64] cmake -G "MinGW Makefiles" -DCMAKE_CXX_FLAGS=-m32 -DCMAKE_C_FLAGS=-m32 -DCMAKE_PREFIX_PATH=C:\mingw64 -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ..
 
 - if [%LIB_TYPE%]==[dll] cmake -DINTEGER_CLASS=gmp ..
 - if not [%LIB_TYPE%]==[lib] cmake -DBUILD_SHARED_LIBS=yes ..
