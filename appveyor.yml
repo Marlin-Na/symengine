@@ -10,12 +10,12 @@ environment:
 
   matrix:
     - BUILD_TYPE: Release
-      COMPILER: MinGW-w64
+      COMPILER: rdep-x64-MinGW-w64
       PLATFORM: x64
       LIB_TYPE: lib
     - BUILD_TYPE: Release
-      COMPILER: MinGW-w64
-      PLATFORM: Win32
+      COMPILER: rdep-i686-MinGW-w64
+      PLATFORM: x64
       LIB_TYPE: lib
 
 install:
@@ -47,6 +47,18 @@ install:
 - if [%COMPILER%]==[MinGW-w64] call bin\appveyor-download.cmd "https://raw.githubusercontent.com/symengine/dependencies/57834d6007065cdd71964c96b397505b2b4ce78a/gmp-6.0.0-x86_64-w64-mingw32.7z" -FileName gmp.7z
 - if [%COMPILER%]==[MinGW-w64] 7z x -oC:\mingw64 gmp.7z > NUL
 
+- if [%COMPILER%]==[rdep-x64-MinGW-w64]   bin\appveyor-download.cmd "https://github.com/Marlin-Na/symengine/blob/rdep-1/x86_64-mingw64.7z" -FileName mw64.7z
+- if [%COMPILER%]==[rdep-i686-MinGW-w64]  bin\appveyor-download.cmd "https://github.com/Marlin-Na/symengine/blob/rdep-1/i686-mingw64.7z"   -FileName mw64.7z
+- if [%COMPILER%]==[rdep-x64-MinGW-w64]   7z x -oC:\ mw64.7z > NUL
+- if [%COMPILER%]==[rdep-i686-MinGW-w64]  7z x -oC:\ mw64.7z > NUL
+- if [%COMPILER%]==[rdep-x64-MinGW-w64]   set PATH=C:\mingw64\bin;%PATH%
+- if [%COMPILER%]==[rdep-i686-MinGW-w64]  set PATH=C:\mingw64\bin;%PATH%
+# Download pre-compiled gmp binaries (FIXME: they are same for both Arch, I am not sure whether it works)
+- if [%COMPILER%]==[rdep-x64-MinGW-w64]   call bin\appveyor-download.cmd "https://raw.githubusercontent.com/symengine/dependencies/57834d6007065cdd71964c96b397505b2b4ce78a/gmp-6.0.0-x86_64-w64-mingw32.7z" -FileName gmp.7z
+- if [%COMPILER%]==[rdep-i686-MinGW-w64]  call bin\appveyor-download.cmd "https://raw.githubusercontent.com/symengine/dependencies/57834d6007065cdd71964c96b397505b2b4ce78a/gmp-6.0.0-x86_64-w64-mingw32.7z" -FileName gmp.7z
+- if [%COMPILER%]==[rdep-x64-MinGW-w64]   7z x -oC:\mingw64 gmp.7z > NUL
+- if [%COMPILER%]==[rdep-i686-MinGW-w64]  7z x -oC:\mingw64 gmp.7z > NUL
+
 build_script:
 - mkdir build
 - cd build
@@ -55,6 +67,8 @@ build_script:
 - if [%COMPILER%]==[MSVC15] if [%PLATFORM%]==[x64] cmake -G "Visual Studio 14 2015 Win64" -DCMAKE_PREFIX_PATH=%CONDA_PREFIX%\Library ..
 - if [%COMPILER%]==[MinGW] cmake -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH=C:\MinGW -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ..
 - if [%COMPILER%]==[MinGW-w64] cmake -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH=C:\mingw64 -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ..
+- if [%COMPILER%]==[rdep-x64-MinGW-w64]   cmake -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH=C:\mingw64 -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ..
+- if [%COMPILER%]==[rdep-i686-MinGW-w64]  cmake -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH=C:\mingw64 -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ..
 
 - if [%LIB_TYPE%]==[dll] cmake -DINTEGER_CLASS=gmp ..
 - if not [%LIB_TYPE%]==[lib] cmake -DBUILD_SHARED_LIBS=yes ..
