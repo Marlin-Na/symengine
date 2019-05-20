@@ -53,9 +53,9 @@ install:
 - if [%COMPILER%]==[rdep-i686-MinGW-w64]  7z x -oC:\ mw64.7z > NUL
 - if [%COMPILER%]==[rdep-x64-MinGW-w64]   set PATH=C:\mingw64\bin;%PATH%
 - if [%COMPILER%]==[rdep-i686-MinGW-w64]  set PATH=C:\mingw64\bin;%PATH%
-# Download pre-compiled gmp binaries (FIXME: they are same for both Arch, I am not sure whether it works)
+# GMP binaries
 - if [%COMPILER%]==[rdep-x64-MinGW-w64]   call bin\appveyor-download.cmd "https://raw.githubusercontent.com/symengine/dependencies/57834d6007065cdd71964c96b397505b2b4ce78a/gmp-6.0.0-x86_64-w64-mingw32.7z" -FileName gmp.7z
-- if [%COMPILER%]==[rdep-i686-MinGW-w64]  call bin\appveyor-download.cmd "https://raw.githubusercontent.com/symengine/dependencies/57834d6007065cdd71964c96b397505b2b4ce78a/gmp-6.0.0-x86_64-w64-mingw32.7z" -FileName gmp.7z
+- if [%COMPILER%]==[rdep-i686-MinGW-w64]  call bin\appveyor-download.cmd "https://raw.githubusercontent.com/symengine/dependencies/57834d6007065cdd71964c96b397505b2b4ce78a/gmp-6.0.0-i686-w64-mingw32.7z" -FileName gmp.7z
 - if [%COMPILER%]==[rdep-x64-MinGW-w64]   7z x -oC:\mingw64 gmp.7z > NUL
 - if [%COMPILER%]==[rdep-i686-MinGW-w64]  7z x -oC:\mingw64 gmp.7z > NUL
 
