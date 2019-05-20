@@ -14,7 +14,7 @@ environment:
       PLATFORM: x64
       LIB_TYPE: lib
     - BUILD_TYPE: Release
-      COMPILER: MinGW
+      COMPILER: MinGW-w64
       PLATFORM: Win32
       LIB_TYPE: lib
 
