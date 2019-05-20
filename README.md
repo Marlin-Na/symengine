@@ -29,3 +29,8 @@ mkdir tmp && 7z x gmp-32.7z -otmp && 7z a gmp-32.zip ./tmp/* && rm -rf tmp
 rm gmp-32.7z gmp-64.7z
 ```
 
+### MinGW-w64
+
+I bundled the MinGW-w64 toolchains for x86_64 and i686 targets.
+They are copied from installation directory of Rtools version 3.5.0.4.
+
