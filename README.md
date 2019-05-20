@@ -3,14 +3,14 @@
 
 ### Compiled symengine library from appveyor
 
-The build is currently derived from commit `[4733e429883aad551138a607f2a5a40f73920f02](https://github.com/symengine/symengine/tree/4733e429883aad551138a607f2a5a40f73920f02)`.
-The current options are (built as shared library, without mpfr and mpc support):
-  - `Environment: BUILD_TYPE=Release, COMPILER=MinGW, PLATFORM=Win32, LIB_TYPE=dll`
-  - `Environment: BUILD_TYPE=Release, COMPILER=MinGW-w64, PLATFORM=x64, LIB_TYPE=dll`
+The build is currently derived from commit [`4733e429883aad551138a607f2a5a40f73920f02`](https://github.com/symengine/symengine/tree/4733e429883aad551138a607f2a5a40f73920f02).
+The current options are (built as static library, without mpfr and mpc support):
+  - `Environment: BUILD_TYPE=Release, COMPILER=MinGW, PLATFORM=Win32, LIB_TYPE=lib`
+  - `Environment: BUILD_TYPE=Release, COMPILER=MinGW-w64, PLATFORM=x64, LIB_TYPE=lib`
 
 ```
-wget -O symengine-32.zip https://ci.appveyor.com/api/buildjobs/tsua4v1i9oalcnvb/artifacts/symengine_MinGW_Win32.zip
-wget -O symengine-64.zip https://ci.appveyor.com/api/buildjobs/2qdywq1h6t93ln92/artifacts/symengine_MinGW-w64_x64.zip
+wget -O symengine-32.zip https://ci.appveyor.com/api/buildjobs/ovyi8r83cakyvr0u/artifacts/symengine_MinGW_Win32.zip
+wget -O symengine-64.zip https://ci.appveyor.com/api/buildjobs/i5xbol57ifga6y45/artifacts/symengine_MinGW-w64_x64.zip
 ```
 
 
