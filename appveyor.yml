@@ -12,11 +12,11 @@ environment:
     - BUILD_TYPE: Release
       COMPILER: MinGW-w64
       PLATFORM: x64
-      LIB_TYPE: dll
+      LIB_TYPE: lib
     - BUILD_TYPE: Release
       COMPILER: MinGW
       PLATFORM: Win32
-      LIB_TYPE: dll
+      LIB_TYPE: lib
 
 install:
 - if [%COMPILER%]==[MSVC15] call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
