@@ -26,12 +26,6 @@ endif ()
 set(BUILD_FOR_DISTRIBUTION no
     CACHE BOOL "Building SymEngine for a distribution")
 
-if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    if (BUILD_FOR_DISTRIBUTION)
-        string(REPLACE "-march=native" "" CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}")
-    endif()
-endif()
-
 #Boost.multiprecision build segfaults if -O3 optimization is on
 #which it is by default for cmake Release mode. Remove -O3 from flags.
 if (("${INTEGER_CLASS}" MATCHES "boostmp") AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -281,14 +275,14 @@ endif()
 # Parser
 set(WITH_GENERATE_PARSER no CACHE BOOL "Generate parser files")
 if (WITH_GENERATE_PARSER)
-    find_program(BISONCPP_EXECUTABLE bisonc++)
-    find_program(FLEXCPP_EXECUTABLE flexc++)
+    find_program(BISON_EXECUTABLE bison)
+    find_program(RE2C_EXECUTABLE re2c)
 
-    if ("${BISONCPP_EXECUTABLE}" STREQUAL "BISONCPP_EXECUTABLE-NOTFOUND")
-        message(FATAL_ERROR "bisonc++ not found!")
+    if ("${BISON_EXECUTABLE}" STREQUAL "BISON_EXECUTABLE-NOTFOUND")
+        message(FATAL_ERROR "bison not found!")
     endif()
-    if ("${FLEXCPP_EXECUTABLE}" STREQUAL "FLEXCPP_EXECUTABLE-NOTFOUND")
-        message(FATAL_ERROR "flexc++ not found!")
+    if ("${RE2C_EXECUTABLE}" STREQUAL "RE2C_EXECUTABLE-NOTFOUND")
+        message(FATAL_ERROR "re2c not found!")
     endif()
 endif()
 
@@ -513,7 +507,7 @@ set(WITH_SYMENGINE_ASSERT no
     CACHE BOOL "Enable SYMENGINE_ASSERT macro")
 
 # SYMENGINE_THREAD_SAFE
-set(WITH_SYMENGINE_THREAD_SAFE no
+set(WITH_SYMENGINE_THREAD_SAFE "${BUILD_FOR_DISTRIBUTION}"
     CACHE BOOL "Enable SYMENGINE_THREAD_SAFE support")
 
 # TESTS
