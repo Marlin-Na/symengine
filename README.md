@@ -8,8 +8,8 @@ Currently they are built with MinGw-w64 in this repository for i686 and x86_64 a
   - `Environment: BUILD_TYPE=Release, COMPILER=rdep-i686-MinGW-w64, PLATFORM=x64, LIB_TYPE=lib`
 
 ```
-wget -O symengine-32.zip https://ci.appveyor.com/api/buildjobs/tpqbsyounttxb9r1/artifacts/symengine_rdep-i686-MinGW-w64_x64.zip
-wget -O symengine-64.zip https://ci.appveyor.com/api/buildjobs/xqksg0cmubkvks56/artifacts/symengine_rdep-x64-MinGW-w64_x64.zip
+wget -O symengine-32.zip https://ci.appveyor.com/api/buildjobs/mydoqqs7u57kf65a/artifacts/symengine_rdep-i686-MinGW-w64_x64.zip
+wget -O symengine-64.zip https://ci.appveyor.com/api/buildjobs/dm61f9fhlh45us2b/artifacts/symengine_rdep-x64-MinGW-w64_x64.zip
 ```
 
 ### GMP
