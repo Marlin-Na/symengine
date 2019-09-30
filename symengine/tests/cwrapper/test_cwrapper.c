@@ -2176,6 +2176,26 @@ void test_cse()
     vecbasic_free(reduced_exprs);
 }
 
+void test_intmax_overflow() {
+    basic x;
+    basic intmax;
+    basic one;
+    basic_new_stack(x);
+    basic_new_stack(intmax);
+    basic_new_stack(one);
+
+    basic_const_one(one);
+    basic_parse2(intmax, "2147483647", 1);
+    basic_add(x, intmax, one);
+    unsigned long v = integer_get_ui(x);
+    SYMENGINE_C_ASSERT(v == 2147483648);
+    printf("x value: %ld\n", v);
+
+    basic_free_stack(x);
+    basic_free_stack(intmax);
+    basic_free_stack(one);
+}
+
 int main(int argc, char *argv[])
 {
     symengine_print_stack_on_segfault();
@@ -2217,5 +2237,6 @@ int main(int argc, char *argv[])
     test_matrix();
     test_lambda_double();
     test_cse();
+    test_intmax_overflow();
     return 0;
 }
